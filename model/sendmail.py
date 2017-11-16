@@ -12,12 +12,18 @@ class SendMail(object):
 		self.total_uv = 0
 
 	def auto_info(self):
-		self.mail.subject('test')
-		self.mail.receiver(mail_info.mail_to)
+		self.mail.subject('域名24小时访问情况')
+		self.mail.receiver(mail_info['mail_to'])
+
+	def attach(self,filename):
+		self.mail.attach(filename)
 
 	def edit_total(self,total_uv):
 		self.total_uv = total_uv
 		html_head = '''
+		dear ALL：<br />
+		域名24小时访问情况：
+		<br />
 		<table border="1" width="90%">
 		<tbody><tr>
 		<td width="100%" style="background-color:#cc0000" colspan="4" align="center"><strong> 总uv量</strong> </td>
@@ -38,9 +44,7 @@ class SendMail(object):
 		line2 = '''</strong></td><td style="background-color:#white" align="center"> <strong>'''.encode('utf8')
 		line3 = '''</strong></td><td style="background-color:#white" align="center"> <strong>'''.encode('utf8')
 		for num in range(40):
-			print num
-			print data_dict
-			line_string = line1 + data_dict[num]['k'].encode('utf8') + line2 + str(data_dict[num]['v']).encode('utf8') + line3 + str(format(float(data_dict[num]['v'])/float(self.total_uv)*100,'.2f')).encode('utf8') + "%</strong></td></tr>"
+			line_string = line1 + data_dict[num]['domain'].encode('utf8') + line2 + str(data_dict[num]['uv']).encode('utf8') + line3 + str(format(float(data_dict[num]['uv'])/float(self.total_uv)*100,'.2f')).encode('utf8') + "%</strong></td></tr>"
 			self.html_head += line_string
 		html_buttom = '''</tbody></table>'''
 

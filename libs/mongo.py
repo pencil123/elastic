@@ -11,3 +11,13 @@ class DomainUV(mongo.Document):
 	meta = {'collection': 'domainuv'}
 	domain = mongo.StringField(max_length=40,required=True)
 	uv = mongo.IntField(max_length=20,required=True)
+	user = mongo.IntField()
+
+class Statistics(mongo.Document):
+	meta = {'collection': 'statistics'}
+	domain = mongo.StringField()
+	user = mongo.IntField()
+	route = mongo.IntField()
+	own = mongo.IntField()
+	https = mongo.IntField()
+	mark = mongo.StringField()

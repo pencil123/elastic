@@ -91,7 +91,6 @@ class elastic():
 		body['body'].update(self.aggs)
 
 		elastic_parameter.update(body)
-		print body
 		result = self.client.search(**elastic_parameter)
 
 		return result['aggregations'][self.return_string]['buckets']

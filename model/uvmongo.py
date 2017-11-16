@@ -15,11 +15,15 @@ class UvMongo():
 		list_data = []
 		for list_info in DomainUV.objects.order_by('-uv'):
 			domain = {}
-			domain['k'] = list_info['domain']
-			domain['v'] = list_info['uv']
+			domain['domain'] = list_info['domain']
+			domain['uv'] = list_info['uv']
+			domain['user'] = list_info['user']
 			list_data.append(domain)
-		self.drop()
 		return list_data
-	
+
+	def update(self,where_dict,value_dict):
+		doc_handler = DomainUV.objects.get(**where_dict)
+		doc_handler.update(**value_dict)
+		doc_handler.save()
 	def drop(self):
 		DomainUV.drop_collection()

@@ -52,8 +52,13 @@ class SendMailDIY(object):
 		'''mail receiver user'''
 		if isinstance(receiver,types.StringType):
 			self.mailto = receiver
+			self.msg['to'] = receiver
 		if isinstance(receiver,types.ListType):
 			self.mailto = receiver
+			string_to = receiver[0]
+			for num in range(1,len(receiver)):
+				string_to += ',' + receiver[num]
+			self.msg['to'] = string_to
 
 
 	def attach(self,filename):
