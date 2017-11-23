@@ -17,6 +17,7 @@ class config():
 		self.mongo = config_info['mongo']
 		self.elastic_parameter = config_info['elastic_parameter']
 		self.mail_info = config_info['sendmail']
+		self.shunt = config_info['shunt']
 		
 
 handler = config()
@@ -24,3 +25,4 @@ elastic_var = handler.elastic
 elastic_parameter = handler.elastic_parameter
 mongo_parameter = handler.mongo
 mail_info = handler.mail_info
+shunt_var = handler.shunt
