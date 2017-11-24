@@ -12,7 +12,7 @@ class UvElastic():
 		self.client.cardinality('remote_addr.keyword')
 		return self.client.aggs_metric_search()
 
-	def term_domain(self,domain_root=True):
+	def term_domain(self,domains_root=True):
 		#基数的值
 		self.client.cardinality('http_host.keyword')
 		cardinality = self.client.aggs_metric_search()['value']
@@ -28,10 +28,12 @@ class UvElastic():
 		result = self.client.aggs_bucket_metrics_search()
 		domain_dict = {}
 		for num in range(len(result)):
-			if domain_root:
+			print result[num]
+			if domains_root:
 				domain = domain_root(result[num]['key'])
 			else:
 				domain = domain_roughing(result[num]['key'])
+
 			if domain_dict.has_key(domain):
 				domain_dict[domain] = domain_dict[domain] + result[num]['cardinality1']['value']
 			elif domain:

@@ -12,7 +12,7 @@ class Shunt():
 		self.post_url = shunt_var['post_url']
 
 	def create(self):
-		domain_dict = self.elastic.term_domain(domain_root=False)
+		domain_dict = self.elastic.term_domain(domains_root=False)
 		shunt_list = []
 		for domain_uv in domain_dict.items():
 			shunt_dict = {}
